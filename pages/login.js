@@ -1,19 +1,65 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { debounce } from "lodash";
+import api from "../services/api/core";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router = useRouter();
   const [username, setUsername] = useState("");
+  const [messageUsername, setMessageUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [messagePassword, setMessagePassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showSignupForm, setShowSignupForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [messageLogin, setMessageLogin] = useState("");
+  const [errorTextField, setErrorTextField] = useState(false);
+
+  const debounceMountGetLogin = useCallback(debounce(mountGetLogin, 400));
+
+  async function mountGetLogin() {
+    loginValidation();
+    try {
+      const parameter = {
+        username: username,
+        password: password,
+      };
+
+      console.log(parameter);
+
+      const getLogin = await api.getLogin(parameter);
+      console.log("getlogin", getLogin);
+      const { data } = getLogin.data;
+      if (data != null) {
+        console.log("data", data);
+        setErrorTextField(false);
+      } else {
+        console.log("data nil");
+        setErrorTextField(true);
+      }
+    } catch (error) {
+      console.log("ERROR LOGIN", error);
+    }
+  }
 
   function handleEnterLogin(e) {
     var code = e.charCode || e.which;
     if (code === 13) {
       e.preventDefault();
       console.log("Login button pressed");
+      debounceMountGetLogin();
+    }
+  }
+
+  function loginValidation() {
+    if (username === "") {
+      setMessageUsername("Username must be filled !");
+    } else {
+      setMessageUsername("");
+    }
+    if (password === "") {
+      setMessagePassword("Password must be filled !");
+    } else {
+      setMessagePassword("");
     }
   }
 
@@ -45,6 +91,7 @@ const Login = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 onKeyDown={(e) => handleEnterLogin(e)}
               ></input>
+              <p className="text-xs text-red-500">{messageUsername}</p>
             </div>
             <div className="py-1">
               <label
@@ -59,15 +106,13 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 required
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyDown={(e) => handleEnterLogin(e)}
               ></input>
+              <p className="text-xs text-red-500">{messagePassword}</p>
             </div>
-            <div className={`visible text-xs text-red-500`}>
-              <p>Wrong username or password</p>
-            </div>
-            <div className="mb-6 m-1 my-4">
+            <div className="mb-6 m-1 my-1">
               <input
                 type="checkbox"
                 onChange={(e) => setShowPassword(e.target.checked)}
@@ -79,7 +124,7 @@ const Login = () => {
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                 type="button"
-                onClick={(e) => handleEnterLogin(e)}
+                onClick={() => debounceMountGetLogin()}
               >
                 Login
               </button>
@@ -87,7 +132,7 @@ const Login = () => {
             <div className="text-sm text-center mt-3">
               <p>
                 {`Don't have an account ? sign up `}
-                <button onClick={() => setShowSignupForm(true)}>here</button>
+                <button onClick={() => router.push("/signup")}>here</button>
               </p>
             </div>
           </div>
