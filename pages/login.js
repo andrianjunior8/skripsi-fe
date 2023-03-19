@@ -12,7 +12,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [messageLogin, setMessageLogin] = useState("");
-  const [errorTextField, setErrorTextField] = useState(false);
+  const [errorTextField, setErrorTextField] = useState(true);
 
   const debounceMountGetLogin = useCallback(debounce(mountGetLogin, 400));
 
@@ -31,10 +31,12 @@ const Login = () => {
       const { data } = getLogin.data;
       if (data != null) {
         console.log("data", data);
-        setErrorTextField(false);
+        setMessageLogin("");
+        setErrorTextField(true);
       } else {
         console.log("data nil");
-        setErrorTextField(true);
+        setMessageLogin("Inccorect username or password!");
+        setErrorTextField(false);
       }
     } catch (error) {
       console.log("ERROR LOGIN", error);
@@ -51,6 +53,7 @@ const Login = () => {
   }
 
   function loginValidation() {
+    setMessageLogin("");
     if (username === "") {
       setMessageUsername("Username must be filled !");
     } else {
@@ -68,7 +71,7 @@ const Login = () => {
   }, [username]);
 
   return (
-    <div className="bg-slate-50 justify-center content-center grid w-screen h-screen">
+    <div className="bg-gray-600 justify-center content-center grid w-screen h-screen">
       <form className="bg-white shadow-md rounded px-5 pt-5 pb-5 mb-5 w-96">
         <div className=" m-2 p-2">
           <p className="font-semibold text-3xl">Login</p>
@@ -120,7 +123,11 @@ const Login = () => {
               ></input>
               <label className="text-sm">Show Password</label>
             </div>
-            <div className="flex place-content-center">
+
+            <div className="border border-red-900" hidden={errorTextField}>
+              <p className="text-center p-6">{messageLogin}</p>
+            </div>
+            <div className="flex place-content-center my-2">
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                 type="button"
