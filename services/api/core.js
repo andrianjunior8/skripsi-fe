@@ -8,7 +8,14 @@ const getLogin = async (params) => {
   return await api.get("/core/getlogin", { params });
 };
 
+const createAccountUser = async (body) => {
+  return await api.post(`/core/createuser`, body, {
+    headers: {},
+  });
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getLogin,
+  createAccountUser,
 };
