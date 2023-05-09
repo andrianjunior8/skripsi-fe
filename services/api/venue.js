@@ -8,7 +8,14 @@ const getVenue = async (params) => {
   return await api.get("/venue/getvenue", { params });
 };
 
+const createVenueDetail = async (body) => {
+  return await api.post(`/venue/createvenuedetail`, body, {
+    headers: {},
+  });
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getVenue,
+  createVenueDetail,
 };

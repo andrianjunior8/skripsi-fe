@@ -26,10 +26,10 @@ const Login = () => {
         roleid: 1,
       };
 
-      console.log(parameter);
+      console.log("[PAYLOAD][LOGIN][USER]", parameter);
 
       const getLogin = await api.getLogin(parameter);
-      console.log("getlogin", getLogin);
+
       const { data } = getLogin.data;
       if (data != null) {
         console.log("data", data);

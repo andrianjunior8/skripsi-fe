@@ -30,12 +30,12 @@ const VenueOwnerLogin = () => {
   async function mountGetLogin() {
     try {
       const parameter = {
-        user_name: username,
-        pass_word: password,
-        role_id: 2,
+        username: username,
+        password: password,
+        roleid: 2,
       };
 
-      console.log(parameter);
+      console.log("[PAYLOAD][LOGIN] : ", parameter);
 
       const getLogin = await api.getLogin(parameter);
       console.log("getlogin", getLogin);
@@ -46,7 +46,7 @@ const VenueOwnerLogin = () => {
         localStorage.setItem("name", data[0].first_name);
         localStorage.setItem("role", data[0].role_id);
         localStorage.setItem("userid", data[0].user_id);
-        e.preventDefault();
+        // e.preventDefault();
         router.push("/organizer/dashboard");
       } else {
         setShowResponseToast(true);

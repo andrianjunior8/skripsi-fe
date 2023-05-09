@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Navbar from "../components/Navbar";
 import Image from "next/image";
 import { BsInstagram, BsFacebook, BsLinkedin } from "react-icons/bs";
 

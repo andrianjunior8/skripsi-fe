@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 const Navbar = () => {
   const [name, setName] = useState("");
@@ -23,6 +23,10 @@ const Navbar = () => {
     router.push("/login");
   }
 
+  useEffect(() => {
+    console.log("role: ", role);
+  }, []);
+
   return (
     <div className="fixed w-full h-20 shadow-xl z-[100] bg-[#F3EFE0]">
       <div className="flex justify-center items-center h-full w-full px-2 2xl:px-16 ">
@@ -36,7 +40,11 @@ const Navbar = () => {
         </div>
         <div>
           {/* Role 1 === USER */}
-          {role === 1 ? (
+          {role === 1 ||
+          role === undefined ||
+          role === null ||
+          role === "" ||
+          role === "1" ? (
             <ul className="hidden md:flex mr-5">
               <Link href="/dashboard">
                 <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
@@ -76,16 +84,30 @@ const Navbar = () => {
         </div>
         <div className="absolute right-16">
           {name !== null ? (
-            <>
-              <p className="text-[#000000]">Welcome, {name}</p>
-              <Button
-                variant="contained"
-                className="bg-blue-600"
-                onClick={() => logout()}
-              >
-                Log out
-              </Button>
-            </>
+            <div className="flex flex-row  border-red-500 border-dashed w-64 align-baseline">
+              <div className="m-2  border-dashed border-green-500">
+                <p className="text-[#000000]">Welcome, {name}</p>
+              </div>
+              <div>
+                <Image
+                  className="overflow-hidden rounded-full flex w-11 h-11 shrink-0 grow-0 mr-6 my-3"
+                  src={`/person.jpg`}
+                  width="100"
+                  height="100"
+                  alt="person"
+                ></Image>
+              </div>
+              <div>
+                <Button
+                  variant="contained"
+                  sx={{ mt: 3 }}
+                  className="bg-blue-600"
+                  onClick={() => logout()}
+                >
+                  <Typography fontSize={7}>Log out</Typography>
+                </Button>
+              </div>
+            </div>
           ) : (
             <div className="gap-2">
               <Button

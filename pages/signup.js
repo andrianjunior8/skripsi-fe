@@ -1,5 +1,5 @@
 import { number } from "prop-types";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import api from "../services/api/core";
 import { useRouter } from "next/router";
 import { debounce } from "lodash";
@@ -19,6 +19,7 @@ const Signup = () => {
   const [fullName, setFullName] = useState("");
   const [fullnameMessage, setFullNameMessage] = useState("");
   const [username, setUsername] = useState("");
+  const [usernameError, setUsernameError] = useState(false);
   const [usernameMessage, setUsernameMessage] = useState("");
   const [firstName, setFirstName] = useState("");
   const [firstNameMessage, setFirstNameMessage] = useState("");
@@ -32,6 +33,8 @@ const Signup = () => {
   const [confirmPasswordMessage, setConfirmPasswordMessage] = useState("");
   const [showResponseToast, setShowResponseToast] = useState(false);
   const [textToast, setTextToast] = useState("");
+
+  var usernameValidation;
 
   function registerValidation() {
     var validation = true;
@@ -93,13 +96,52 @@ const Signup = () => {
     }
   }
 
+  const debounceMountCheckUsername = useCallback(
+    debounce(mountCheckUsername, 400)
+  );
+
+  async function mountCheckUsername(value) {
+    try {
+      const parameter = {
+        username: value,
+      };
+
+      console.log("[PAYLOAD][CHECK][USER]", parameter);
+
+      const checkUser = await api.checkUsername(parameter);
+
+      const { data } = checkUser.data;
+      if (data == "USERNAME CAN BE USE") {
+        usernameValidation = true;
+      } else if (data == "USERNAME ALREADY USED") {
+        usernameValidation = false;
+      }
+
+      if (value == "") {
+        setUsernameMessage("Username Must Be Filled!");
+        setUsernameError(true);
+      } else if (usernameValidation == false) {
+        setUsernameMessage("Username Already Exist!");
+        setUsernameError(true);
+      } else if (value.length <= 7) {
+        setUsernameMessage("Username Must be more than 7 character!");
+        setUsernameError(true);
+      } else {
+        setUsernameMessage("");
+        setUsernameError(false);
+      }
+    } catch (error) {
+      console.log("ERROR LOGIN", error);
+    }
+  }
+
   const debounceCreateAccount = useCallback(debounce(createAccountUser, 400));
 
   async function createAccountUser() {
     try {
       const payload = {
         user_name: username,
-        phone_number: phoneNumber,
+        phone_number: "0" + phoneNumber,
         pass_word: password,
         role_id: 1,
         first_name: firstName,
@@ -122,6 +164,12 @@ const Signup = () => {
     } catch (error) {
       console.log("ERROR LOGIN", error);
     }
+  }
+
+  async function validateUsername(e) {
+    var value = e.target.value;
+    setUsername(value);
+    debounceMountCheckUsername(value);
   }
 
   return (
@@ -186,9 +234,10 @@ const Signup = () => {
                 label="Username"
                 size="small"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                error={usernameError}
+                helperText={usernameMessage}
+                onChange={(e) => validateUsername(e)}
               ></TextField>
-              <p className="text-xs text-red-500">{usernameMessage}</p>
             </div>
           </div>
           <div className="mb-4 py-1">

@@ -2,21 +2,21 @@ import React from "react";
 
 const main = () => {
   return (
-    <div className="w-auto h-auto absolute bg-[#E1EEDD]">
-      <div className="mt-20 ">
+    <div className="w-screen h-auto absolute bg-white">
+      <div className="ml-10  mt-28 w-screen">
         <img
           src={`/basketball.jpg`}
-          className="h-auto w-auto "
-          width="500"
-          height="500"
-          alt="dashboard"
+          className="w-auto h-screen object-fit:fill"
+          width="500px"
+          height="500px"
+          alt="Banner"
         ></img>
       </div>
       <div className="m-10">
         <div className="p-10">
-          <p className="text-5xl font-bold font-mono text-center ">Sports</p>
+          <p className="text-5xl font-bold font-mono text-center ">Category</p>
         </div>
-        <div className="p-16 rounded-lg bg-[#F3EFE0]">
+        <div className="p-16 rounded-lg bg-[#FFF6C3]">
           <div className="grid grid-cols-3 text-center">
             <div className="flex justify-center">
               <div className="">
@@ -109,32 +109,121 @@ const main = () => {
         <div className="m-10 p-10">
           <p className="text-5xl font-bold font-mono text-center">Popular</p>
         </div>
-        {/* <div className="h-96 w-60 bg-slate-800 absolute left-44 rounded-xl"></div> */}
-        <div className="overflow-x-scroll h-auto">
-          <div className="max-w-sm rounded shadow-2xl border-t-black overflow-hidden">
-            <img
-              src={`/soccer.jpg`}
-              className="w-full rounded-md"
-              width="500"
-              height="500"
-              alt="futsal"
-            ></img>
-            <p className="text-center p-2 text-lg font-bold">Title</p>
-            <p className="p-1">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the standard dummy text ever since
-              the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not
-              only five centuries, but also the leap into electronic
-              typesetting, remaining essentially unchanged. It was popularised
-              in the 1960s with the release of Letraset sheets containing Lorem
-              Ipsum passages, and more recently with desktop publishing software
-              like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
+
+        <div class="bg-[#FFF6C3] m-14">
+          <div class="bg-[#FFF6C3] mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+              <div class="group relative p-10 border border-gray-400">
+                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
+                  <img
+                    src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
+                    className="w-full h-full rounded-md"
+                    width="500"
+                    height="500"
+                    alt="futsal"
+                  ></img>
+                </div>
+                <div class="mt-4 flex justify-between">
+                  <div>
+                    <h3 class="text-sm text-gray-700">
+                      <a href="#">
+                        <span
+                          aria-hidden="true"
+                          class="absolute inset-0"
+                        ></span>
+                        Lapangan Futsal Elang
+                      </a>
+                    </h3>
+                    <p class="mt-1 text-sm text-gray-500">Kemanggisan Raya</p>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="group relative p-10 border border-gray-400">
+                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
+                  <img
+                    src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
+                    className="w-full h-full rounded-md"
+                    width="500"
+                    height="500"
+                    alt="futsal"
+                  ></img>
+                </div>
+                <div class="mt-4 flex justify-between">
+                  <div>
+                    <h3 class="text-sm text-gray-700">
+                      <a href="#">
+                        <span
+                          aria-hidden="true"
+                          class="absolute inset-0"
+                        ></span>
+                        Lapangan Futsal Elang
+                      </a>
+                    </h3>
+                    <p class="mt-1 text-sm text-gray-500">Kemanggisan Raya</p>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="group relative p-10 border border-gray-400">
+                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
+                  <img
+                    src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
+                    className="w-full h-full rounded-md"
+                    width="500"
+                    height="500"
+                    alt="futsal"
+                  ></img>
+                </div>
+                <div class="mt-4 flex justify-between">
+                  <div>
+                    <h3 class="text-sm text-gray-700">
+                      <a href="#">
+                        <span
+                          aria-hidden="true"
+                          class="absolute inset-0"
+                        ></span>
+                        Lapangan Futsal Elang
+                      </a>
+                    </h3>
+                    <p class="mt-1 text-sm text-gray-500">Kemanggisan Raya</p>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="group relative p-10 border border-gray-400">
+                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
+                  <img
+                    src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
+                    className="w-full h-full rounded-md"
+                    width="500"
+                    height="500"
+                    alt="futsal"
+                  ></img>
+                </div>
+                <div class="mt-4 flex justify-between">
+                  <div>
+                    <h3 class="text-sm text-gray-700">
+                      <a href="#">
+                        <span
+                          aria-hidden="true"
+                          class="absolute inset-0"
+                        ></span>
+                        Lapangan Futsal Elang
+                      </a>
+                    </h3>
+                    <p class="mt-1 text-sm text-gray-500">Kemanggisan Raya</p>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="p-96"></div>
     </div>
   );
 };

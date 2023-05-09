@@ -1,12 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import {
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import SearchIcon from "@mui/icons-material/Search";
+import React, { useState } from "react";
 
 const Venue = () => {
+  const [type, setType] = useState("");
   return (
-    <div className="h-auto w-screen bg-gradient-to-r from-cyan-500 to-blue-500 grid">
+    <div className="h-auto w-screen bg-white grid">
       <div className="mt-20">
         <div className="absolute left-11 mt-12">
-          <div className=" w-80 h-auto rounded-lg bg-white">
+          <div className=" w-80 h-auto rounded-lg bg-white border border-gray-300">
             <div className="p-3">
               <div>
                 <p className="font-bold text-2xl text-[#1d1d1c]">Sport</p>
@@ -22,7 +36,7 @@ const Venue = () => {
               </div>
               <div className="flow-root">
                 <div className="float-left text-lg text-[#1d1d1c]">
-                  Bulu Tangkis
+                  Badminton
                 </div>
                 <div className="float-right text-lg text-[#1d1d1c]">1</div>
               </div>
@@ -33,22 +47,42 @@ const Venue = () => {
           <div className="mb-7">
             <p className="text-lg font-bold">Home/Venue</p>
           </div>
-          <div className="w-auto mb-7 flex">
-            <div class="flex justify-center">
-              <div class="relative mb-3 xl:w-96">
-                <input
-                  type="text"
-                  class="peer block min-h-[auto] w-full bg-white rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                  placeholder="Nama Venue"
-                />
-                <label class="pointer-events-none text-black absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6]  transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-black dark:peer-focus:text-black">
-                  Name Venue
-                </label>
-              </div>
+          <div className="w-full mb-7 flex">
+            <div class="flex items-stretch">
+              <TextField
+                variant="outlined"
+                size="small"
+                label="Nama Venue"
+                className="bg-white w-full"
+              >
+                Nama Venue
+              </TextField>
+              <TextField
+                variant="outlined"
+                size="small"
+                className="ml-2 w-full"
+                label="Lokasi"
+              ></TextField>
+
+              <FormControl size="small" className="w-full ml-2" fullWidth>
+                <InputLabel size="small">Type</InputLabel>
+                <Select
+                  size="small"
+                  label="Type"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                >
+                  <MenuItem value={1}>Futsal</MenuItem>
+                  <MenuItem value={2}>Badminton</MenuItem>
+                </Select>
+              </FormControl>
+              <Button variant="outlined" className="ml-2">
+                <SearchIcon></SearchIcon>
+              </Button>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-x-0 gap-y-4">
-            <div className="max-w-lg rounded hover:shadow-2xl border-t-black overflow-hidden bg-white p-3">
+          <div className="grid grid-cols-3 gap-x-0 gap-y-4 ">
+            <div className="max-w-lg rounded hover:shadow-2xl border border-gray-300 overflow-hidden bg-white ">
               <img
                 src={`/rama.jpeg`}
                 alt="futsal"
@@ -56,19 +90,31 @@ const Venue = () => {
                 width={500}
                 height={500}
               ></img>
-              <p className="text-left mt-1 mb-3 text-lg font-bold">
-                Bintang Rama Futsal
-              </p>
-              <p
-                className="bg-green-500 w-auto leading-none text-sm font-medium text-gray-50 p-2
-                rounded-full uppercase mb-2"
-              >
-                Futsal
-              </p>
-              <p className="font-bold">Location</p>
-              <p className="p-1">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-              </p>
+              <Box className="p-3">
+                <p className="text-left mt-1 mb-3 text-lg font-bold">
+                  Bintang Rama Futsal
+                </p>
+                <Box className="grid grid-cols-3">
+                  <Typography className="w-auto text-center border bg-green-500 text-white rounded-md">
+                    Futsal
+                  </Typography>
+
+                  <Typography className="w-auto text-center border bg-purple-500 text-white rounded-md">
+                    Badminton
+                  </Typography>
+                </Box>
+                <Box className="flex items-stretch  my-2">
+                  <Grid className="item">
+                    <p className="font-bold mr-6">Bekasi Timur</p>
+                  </Grid>
+                  <Grid className="item">
+                    <StarIcon sx={{ fontSize: 20, color: "yellow" }}></StarIcon>
+                  </Grid>
+                  <Typography>5.0</Typography>
+                </Box>
+
+                <p className="p-1">Mulai dari Rp180.000 / Jam</p>
+              </Box>
             </div>
           </div>
         </div>

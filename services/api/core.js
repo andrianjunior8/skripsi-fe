@@ -14,8 +14,13 @@ const createAccountUser = async (body) => {
   });
 };
 
+const checkUsername = async (params) => {
+  return await api.get("/core/checkusername", { params });
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getLogin,
   createAccountUser,
+  checkUsername,
 };
