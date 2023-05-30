@@ -1,6 +1,34 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { debounce } from "lodash";
+import venue from "../../services/api/venue";
+import { useRouter } from "next/router";
 
-const main = () => {
+const Dashboard = () => {
+  const [listAllVenue, setListAllVenue] = useState([]);
+
+  const dbGetAllVenue = useCallback(debounce(mtGetAllVenue, 400));
+
+  async function mtGetAllVenue() {
+    try {
+      const getvenue = await venue.getAllVenue();
+
+      const { data } = getvenue.data;
+
+      console.log("data", data);
+      if (data != null) {
+        setListAllVenue(data);
+      } else {
+        setListAllVenue([]);
+      }
+    } catch (error) {
+      console.log("ERROR: ", error);
+    }
+  }
+
+  useEffect(() => {
+    dbGetAllVenue();
+  }, []);
+
   return (
     <div className="w-screen h-auto absolute bg-white">
       <div className="ml-10  mt-28 w-screen">
@@ -16,7 +44,7 @@ const main = () => {
         <div className="p-10">
           <p className="text-5xl font-bold font-mono text-center ">Category</p>
         </div>
-        <div className="p-16 rounded-lg bg-[#FFF6C3]">
+        <div className="p-16 rounded-lg bg-[#FFF6C3] shadow-md">
           <div className="grid grid-cols-3 text-center">
             <div className="flex justify-center">
               <div className="">
@@ -106,120 +134,47 @@ const main = () => {
             </div>
           </div>
         </div>
-        <div className="m-10 p-10">
+        <div className="m-10 p-5">
           <p className="text-5xl font-bold font-mono text-center">Popular</p>
         </div>
 
-        <div class="bg-[#FFF6C3] m-14">
-          <div class="bg-[#FFF6C3] mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-              <div class="group relative p-10 border border-gray-400">
-                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
-                  <img
-                    src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
-                    className="w-full h-full rounded-md"
-                    width="500"
-                    height="500"
-                    alt="futsal"
-                  ></img>
-                </div>
-                <div class="mt-4 flex justify-between">
-                  <div>
-                    <h3 class="text-sm text-gray-700">
-                      <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Lapangan Futsal Elang
-                      </a>
-                    </h3>
-                    <p class="mt-1 text-sm text-gray-500">Kemanggisan Raya</p>
-                    <p class="text-sm font-medium text-gray-900">$35</p>
+        <div className="bg-[#FFF6C3] m-14">
+          <div className="bg-[#FFF6C3] mx-auto max-w-2xl px-4  sm:px-6 py-4 lg:max-w-7xl lg:px-8">
+            <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+              {listAllVenue &&
+                listAllVenue.map((item, index) => (
+                  <div
+                    key={index}
+                    className="group relative border border-gray-400 rounded-md shadow-sm shadow-black bg-white"
+                  >
+                    <div className="overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
+                      <img
+                        src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
+                        className="w-full h-52 rounded-md "
+                        alt="futsal"
+                      ></img>
+                    </div>
+                    <div className="mt-4 flex justify-between p-2">
+                      <div>
+                        <h3 className="text-sm text-gray-700">
+                          <a href="#">
+                            <span
+                              aria-hidden="true"
+                              className="absolute inset-0"
+                            ></span>
+                            {item.venue_name}
+                          </a>
+                        </h3>
+                        <p className="mt-1 text-sm text-gray-500">
+                          {item.venue_province} - {item.venue_city}
+                        </p>
+                        <p className="text-sm font-medium text-gray-900">
+                          Harga Mulai Dari Rp 20.000/hour
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div class="group relative p-10 border border-gray-400">
-                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
-                  <img
-                    src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
-                    className="w-full h-full rounded-md"
-                    width="500"
-                    height="500"
-                    alt="futsal"
-                  ></img>
-                </div>
-                <div class="mt-4 flex justify-between">
-                  <div>
-                    <h3 class="text-sm text-gray-700">
-                      <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Lapangan Futsal Elang
-                      </a>
-                    </h3>
-                    <p class="mt-1 text-sm text-gray-500">Kemanggisan Raya</p>
-                    <p class="text-sm font-medium text-gray-900">$35</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="group relative p-10 border border-gray-400">
-                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
-                  <img
-                    src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
-                    className="w-full h-full rounded-md"
-                    width="500"
-                    height="500"
-                    alt="futsal"
-                  ></img>
-                </div>
-                <div class="mt-4 flex justify-between">
-                  <div>
-                    <h3 class="text-sm text-gray-700">
-                      <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Lapangan Futsal Elang
-                      </a>
-                    </h3>
-                    <p class="mt-1 text-sm text-gray-500">Kemanggisan Raya</p>
-                    <p class="text-sm font-medium text-gray-900">$35</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="group relative p-10 border border-gray-400">
-                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
-                  <img
-                    src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
-                    className="w-full h-full rounded-md"
-                    width="500"
-                    height="500"
-                    alt="futsal"
-                  ></img>
-                </div>
-                <div class="mt-4 flex justify-between">
-                  <div>
-                    <h3 class="text-sm text-gray-700">
-                      <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Lapangan Futsal Elang
-                      </a>
-                    </h3>
-                    <p class="mt-1 text-sm text-gray-500">Kemanggisan Raya</p>
-                    <p class="text-sm font-medium text-gray-900">$35</p>
-                  </div>
-                </div>
-              </div>
+                ))}
             </div>
           </div>
         </div>
@@ -228,4 +183,4 @@ const main = () => {
   );
 };
 
-export default main;
+export default Dashboard;

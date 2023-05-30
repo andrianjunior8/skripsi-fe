@@ -8,6 +8,10 @@ const getVenue = async (params) => {
   return await api.get("/venue/getvenue", { params });
 };
 
+const getAllVenue = async () => {
+  return await api.get("/venue/getallvenue");
+};
+
 const createVenueDetail = async (body) => {
   return await api.post(`/venue/createvenuedetail`, body, {
     headers: {},
@@ -16,6 +20,7 @@ const createVenueDetail = async (body) => {
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+  getAllVenue,
   getVenue,
   createVenueDetail,
 };

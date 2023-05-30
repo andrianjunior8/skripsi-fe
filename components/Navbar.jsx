@@ -56,6 +56,11 @@ const Navbar = () => {
                   Venue
                 </li>
               </Link>
+              <Link href="/leaderboard">
+                <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
+                  Leaderboard
+                </li>
+              </Link>
               <Link href="/contactus">
                 <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
                   Contact Us
