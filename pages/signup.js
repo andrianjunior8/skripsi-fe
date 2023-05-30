@@ -157,6 +157,7 @@ const Signup = () => {
       if (data == "SUCCESS") {
         setTextToast("SUCCESS");
         setShowResponseToast(true);
+        router.push("/login");
       } else if (data == "FAILED") {
         setTextToast("FAILED");
         setShowResponseToast(true);
