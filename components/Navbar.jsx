@@ -2,12 +2,30 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button, Typography } from "@mui/material";
+import { Button, Menu, MenuItem, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = () => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
+  const [anchorEl, setAnchorEl] = useState(false);
+  const [anchorElMenu, setAnchorElMenu] = useState(false);
+  const open = Boolean(anchorEl);
+  const openMenu = Boolean(anchorElMenu);
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClickMenu = (event) => {
+    setAnchorElMenu(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorElMenu(null);
+  };
   const router = useRouter();
 
   useEffect(() => {
@@ -28,15 +46,15 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="fixed w-full h-20 shadow-xl z-[100] bg-[#F3EFE0]">
+    <div className="fixed w-screen h-20 shadow-xl z-[100] bg-[#F3EFE0]">
       <div className="flex justify-center items-center h-full w-full px-2 2xl:px-16 ">
         <div className="absolute left-16">
-          {/* <Image
-            src="/../public/assets/me.jpg"
+          <Image
+            src="/sehatRagaIcon.png"
             alt="/"
-            width="50"
-            height="50"
-          ></Image> */}
+            width="100"
+            height="100"
+          ></Image>
         </div>
         <div>
           {/* Role 1 === USER */}
@@ -56,11 +74,37 @@ const Navbar = () => {
                   Venue
                 </li>
               </Link>
-              <Link href="/leaderboard">
-                <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
-                  Leaderboard
-                </li>
-              </Link>
+              <div>
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  className="m-8 text-sm text-[#000000] uppercase hover:border-b"
+                  onClick={(e) => handleClick(e)}
+                >
+                  Community
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={() => router.push("/mycommunity")}>
+                    My Community
+                  </MenuItem>
+                  <MenuItem onClick={() => router.push("/joincommunity")}>
+                    Join Community
+                  </MenuItem>
+                  <MenuItem onClick={() => router.push("/createcommunity")}>
+                    Create Community
+                  </MenuItem>
+                </Menu>
+              </div>
               <Link href="/contactus">
                 <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
                   Contact Us
@@ -90,27 +134,33 @@ const Navbar = () => {
         <div className="absolute right-16">
           {name !== null ? (
             <div className="flex flex-row  border-red-500 border-dashed w-64 align-baseline">
-              <div className="m-2  border-dashed border-green-500">
-                <p className="text-[#000000]">Welcome, {name}</p>
-              </div>
-              <div>
-                <Image
-                  className="overflow-hidden rounded-full flex w-11 h-11 shrink-0 grow-0 mr-6 my-3"
-                  src={`/person.jpg`}
-                  width="100"
-                  height="100"
-                  alt="person"
-                ></Image>
-              </div>
+              <div className="m-2  border-dashed border-green-500"></div>
               <div>
                 <Button
-                  variant="contained"
-                  sx={{ mt: 3 }}
-                  className="bg-blue-600"
-                  onClick={() => logout()}
+                  id="basic-button"
+                  aria-controls={openMenu ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openMenu ? "true" : undefined}
+                  className="m-8 text-sm text-[#000000] uppercase hover:border-b"
+                  onClick={(e) => handleClickMenu(e)}
                 >
-                  <Typography fontSize={7}>Log out</Typography>
+                  <p className="text-[#000000]">Welcome, {name}</p>
                 </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorElMenu}
+                  open={openMenu}
+                  onClose={handleCloseMenu}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={(e) => router.push("/ticket")}>
+                    Ticket
+                  </MenuItem>
+
+                  <MenuItem onClick={() => logout()}>Log out</MenuItem>
+                </Menu>
               </div>
             </div>
           ) : (

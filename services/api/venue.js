@@ -8,6 +8,14 @@ const getVenue = async (params) => {
   return await api.get("/venue/getvenue", { params });
 };
 
+const getPopularVenue = async () => {
+  return await api.get("/venue/getpopularvenue");
+};
+
+const getTotalTipeVenue = async () => {
+  return await api.get("/venue/gettotaltipevenue");
+};
+
 const getAllVenue = async () => {
   return await api.get("/venue/getallvenue");
 };
@@ -18,9 +26,21 @@ const createVenueDetail = async (body) => {
   });
 };
 
+const searchVenue = async (params) => {
+  return await api.get("/venue/searchvenue", { params });
+};
+
+const deleteTDVenue = async (params) => {
+  return await api.get("/venue/deletetdvenue", { params });
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getAllVenue,
+  getPopularVenue,
   getVenue,
   createVenueDetail,
+  getTotalTipeVenue,
+  searchVenue,
+  deleteTDVenue,
 };
