@@ -36,6 +36,7 @@ const Login = () => {
         setMessageLogin("");
         localStorage.setItem("name", data[0].first_name);
         localStorage.setItem("role", data[0].role_id);
+        localStorage.setItem("userid", data[0].user_id);
         router.push("/dashboard");
       } else {
         setShowResponseToast(true);
