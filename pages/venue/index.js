@@ -100,7 +100,7 @@ const Venue = () => {
   }, [namaVenue, cityVenue, type]);
 
   return (
-    <div className="h-screen w-screen bg-white grid">
+    <div className="h-auto w-screen bg-slate-100 grid">
       <div className="mt-20">
         <div className="absolute left-11 mt-12">
           <div className=" w-80 h-auto rounded-lg bg-white border border-gray-300">
@@ -133,7 +133,7 @@ const Venue = () => {
                 variant="outlined"
                 size="small"
                 label="Nama Venue"
-                className="bg-white w-full"
+                className="w-full"
                 value={namaVenue}
                 onChange={(e) => setNamaVenue(e.target.value)}
               >
@@ -185,9 +185,9 @@ const Venue = () => {
                   }
                 >
                   <img
-                    src={`/rama.jpeg`}
+                    src={`${item.venue_img_source}`}
                     alt="futsal"
-                    className="overflow-hidden w-auto h-96-"
+                    className="object-none h-40 w-full rounded"
                     width={500}
                     height={500}
                   ></img>
@@ -200,7 +200,7 @@ const Venue = () => {
                       {item.Tags.map((item, index) => (
                         <Typography
                           key={index}
-                          className="w-auto text-center border bg-green-500 text-white rounded-md"
+                          className="w-auto text-center border bg-green-500 text-white rounded-md text-[10px]"
                         >
                           {item.venue_type_name}
                         </Typography>
@@ -214,12 +214,6 @@ const Venue = () => {
                       <Grid className="item">
                         <p className="font-bold mr-6">{item.venue_city}</p>
                       </Grid>
-                      <Grid className="item">
-                        <StarIcon
-                          sx={{ fontSize: 20, color: "yellow" }}
-                        ></StarIcon>
-                      </Grid>
-                      <Typography>5.0</Typography>
                     </Box>
                     <p className="p-1">
                       {"Opens from "}

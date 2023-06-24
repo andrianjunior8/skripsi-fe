@@ -12,12 +12,10 @@ import {
   Link,
   TextField,
 } from "@mui/material";
-import Image from "next/image";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const Signup = () => {
   const router = useRouter();
-  const [fullName, setFullName] = useState("");
-  const [fullnameMessage, setFullNameMessage] = useState("");
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState(false);
   const [usernameMessage, setUsernameMessage] = useState("");
@@ -38,12 +36,6 @@ const Signup = () => {
 
   function registerValidation() {
     var validation = true;
-    if (fullName === "") {
-      setFullNameMessage("Full Name Must Be Filled!");
-      validation = false;
-    } else {
-      setFullNameMessage("");
-    }
     if (username === "") {
       setUsernameMessage("Username Must Be Filled!");
       validation = false;
@@ -51,13 +43,13 @@ const Signup = () => {
       setUsernameMessage("");
     }
     if (firstName === "") {
-      setFirstNameMessage("First Name Must Be Filled !");
+      setFirstNameMessage("First Name Must Be Filled!");
       validation = false;
     } else {
       setFirstNameMessage("");
     }
     if (lastName === "") {
-      setLastNameMessage("Last Name Must Be Filled !");
+      setLastNameMessage("Last Name Must Be Filled!");
     } else {
       setLastNameMessage("");
     }
@@ -174,33 +166,23 @@ const Signup = () => {
   }
 
   return (
-    <div className=" w-screen h-screen bg-gradient-to-b from-cyan-500 to-blue-500 grid place-content-center">
+    <div className=" w-screen h-screen bg-gradient-to-b from-slate-200 to-slate-100 grid place-content-center">
       <form className="bg-white shadow-md rounded px-5 pt-5 pb-5 mb-5 w-96">
         <div className=" m-2 p-2">
           <div className="mb-5 flex items-center">
             <Link href="/dashboard">
-              <Image src="/favicon.ico" width={24} height={24} />
+              <ArrowBackIcon className="text-black"></ArrowBackIcon>
             </Link>
             <label className="text-sm text-black font-semibold ml-2">
-              Back to dashboard
+              <Link href="/login" className="no-underline text-black">
+                Back to Home Page
+              </Link>
             </label>
           </div>
-          <p className="font-semibold text-3xl">Sign up</p>
-          <p className="py-4">Become a member</p>
+          <p className="font-bold text-3xl">Signup</p>
+          <p className="mt-1 text-gray-700 text-sm">Become a Member</p>
         </div>
-        <div className="w-full  max-w-xs">
-          <div className="mb-4 py-1">
-            <TextField
-              className="shadow rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="fullname"
-              type="text"
-              size="small"
-              label="Full Name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-            ></TextField>
-            <p className="text-xs text-red-500">{fullnameMessage}</p>
-          </div>
+        <div className="w-full ml-3 max-w-xs">
           <Grid className="columns-2">
             <div className="mb-4 py-1">
               <TextField
@@ -236,9 +218,9 @@ const Signup = () => {
                 size="small"
                 value={username}
                 error={usernameError}
-                helperText={usernameMessage}
                 onChange={(e) => validateUsername(e)}
               ></TextField>
+              <p className="text-xs text-red-500">{usernameMessage}</p>
             </div>
           </div>
           <div className="mb-4 py-1">
@@ -288,7 +270,7 @@ const Signup = () => {
           </div>
           <div className="mb-4 py-1">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+              className="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
               type="button"
               onClick={() => registerValidation()}
               disabled={""}
@@ -298,13 +280,13 @@ const Signup = () => {
           </div>
           <div className="text-center">
             <p className="text-sm">
-              Already have an account ?{" "}
+              {"Already Have an Account? "}
               <button
                 type="button"
-                className="text-sm"
+                className="text-red-900 font-bold"
                 onClick={() => router.push("/login")}
               >
-                login here
+                Login Here
               </button>
             </p>
           </div>

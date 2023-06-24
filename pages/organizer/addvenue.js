@@ -26,11 +26,15 @@ const AddVenue = () => {
 
   const [file, setFile] = useState();
   const [base64, setBase64] = useState("");
+  const [venueid, setVenueID] = useState("");
+  const [fileReader, setFileReader] = useState();
 
   const router = useRouter();
 
-  const venueid = localStorage.getItem("venueid");
-  const fileReader = new FileReader();
+  useEffect(() => {
+    setVenueID(localStorage.getItem("venueid"));
+    setFileReader(new FileReader());
+  }, [!router.isReady]);
 
   useEffect(() => {
     console.log("file", file);
@@ -76,8 +80,96 @@ const AddVenue = () => {
     }
   }
   return (
-    <div className="bg-white w-screen h-screen py-20">
-      <Box className=" p-7">
+    <div className="w-screen h-auto absolute bg-slate-100">
+      <div className="w-screen pl-10 pr-10">
+        <div className="mx-auto max-w-xl py-24 sm:px-6 sm:py-32 lg:px-8">
+          <div className="relative isolate overflow-hidden bg-white px-6 pt-16 shadow-2xl sm:rounded-3xl ">
+            <div className="text-center pb-2 ">
+              <h3 className=""> ADD VENUE </h3>
+            </div>
+
+            <div className="pt-5 pl-10 pr-10">
+              <TextField
+                className="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                onChange={(e) => setNamaVenue(e.target.value)}
+                size="small"
+                label="Name"
+              ></TextField>
+            </div>
+
+            <div className="pt-5 pl-10 pr-10">
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label" size="small">
+                  Sports
+                </InputLabel>
+                <Select
+                  label="Sports"
+                  size="small"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                >
+                  <MenuItem value={1}>SEPAK BOLA</MenuItem>
+                  <MenuItem value={2}>FUTSAL</MenuItem>
+                  <MenuItem value={3}>BADMINTON</MenuItem>
+                  <MenuItem value={4}>TENNIS</MenuItem>
+                  <MenuItem value={5}>MINI SOCCER</MenuItem>
+                  <MenuItem value={6}>BASKET</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="pt-5 pl-10 pr-10">
+              <TextField
+                className="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                size="small"
+                type="text"
+                label="Price"
+                onChange={(e) => setPrice(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">Rp</InputAdornment>
+                  ),
+                }}
+              ></TextField>
+            </div>
+
+            <div className="pt-5 pl-10 pr-10">
+              <TextField
+                className="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                onChange={(e) => setDesc(e.target.value)}
+                label="Description"
+                size="small"
+                multiline
+                rows={4}
+              />
+            </div>
+
+            <div className="pt-5 pb-5 pl-10 pr-10">
+              <label className="text-sm text-gray-600">Add Image:</label>
+              <div>
+                <input
+                  type="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  className="pt-2"
+                ></input>
+              </div>
+            </div>
+
+            <div className="pt-5 mb-10 pl-10 pr-10">
+              <button
+                className="bg-red-900 hover:bg-red-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                type="button"
+                onClick={() => debounceCreateVenueDetail()}
+                size="small"
+              >
+                CREATE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <Box className=" p-7">
         <Grid>
           <Typography fontSize={40} fontWeight="bold" className="text-center">
             ADD VENUE
@@ -151,7 +243,8 @@ const AddVenue = () => {
             Create
           </Button>
         </Grid>
-      </Box>
+      </Box> */}
+
       <Collapse in={showResponseToast}>
         {textToast === "SUCCESS" ? (
           <Box className="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow top-5 right-5 dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800">

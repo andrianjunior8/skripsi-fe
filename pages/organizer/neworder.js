@@ -39,10 +39,11 @@ const NewOrder = () => {
     debounce(mountUpdateAccept, 400)
   );
 
-  async function mountUpdateAccept(orderID, value) {
+  async function mountUpdateAccept(orderID, orderTime, value) {
     try {
       const parameter = {
         orderid: orderID,
+        ordertime: orderTime,
         accept: value,
       };
       const getHistory = await saleApi.updateAccept(parameter);
@@ -89,6 +90,7 @@ const NewOrder = () => {
                               onClick={() =>
                                 debounceMountUpdateAccept(
                                   item.sale_orderid,
+                                  item.sale_ordertime,
                                   "Y"
                                 )
                               }
@@ -103,6 +105,7 @@ const NewOrder = () => {
                               onClick={() =>
                                 debounceMountUpdateAccept(
                                   item.sale_orderid,
+                                  item.sale_ordertime,
                                   "N"
                                 )
                               }

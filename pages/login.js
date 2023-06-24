@@ -3,7 +3,7 @@ import { debounce } from "lodash";
 import api from "../services/api/core";
 import { useRouter } from "next/router";
 import { Box, Button, Collapse, Link, TextField } from "@mui/material";
-import Image from "next/image";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const Login = () => {
   const router = useRouter();
@@ -83,19 +83,23 @@ const Login = () => {
   }, [username]);
 
   return (
-    <div className="bg-gradient-to-b from-cyan-500 to-blue-500 justify-center content-center grid w-screen h-screen">
+    <div className="bg-gradient-to-b from-slate-200 to-slate-100 justify-center content-center grid w-screen h-screen">
       <form className="bg-white shadow-md rounded px-5 pt-5 pb-5 mb-5 w-96">
         <div className=" m-2 p-2">
           <div className="mb-5 flex items-center">
             <Link href="/dashboard">
-              <Image src="/favicon.ico" width={24} height={24} />
+              <ArrowBackIcon className="text-black"></ArrowBackIcon>
             </Link>
-            <label className="text-sm text-black font-semibold ml-2">
-              Back to dashboard
+            <label className="text-sm font-semibold ml-2">
+              <Link href="/dashboard" className="no-underline text-black">
+                Back to Home Page
+              </Link>
             </label>
           </div>
-          <p className="font-semibold text-3xl">Login</p>
-          <p className="py-4">Hello, login to continue!</p>
+          <p className="font-bold text-3xl">Login</p>
+          <p className="mt-1 mb-5 text-gray-700 text-sm">
+            Hi, login to continue!
+          </p>
           {/* <div class="flex items-center my-2 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"></div> */}
           <div className="w-full max-w-xs ">
             <div className="mb-4 py-1">
@@ -132,7 +136,7 @@ const Login = () => {
             </div>
             <div className="flex place-content-center my-2">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                className="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                 type="button"
                 onClick={() => loginValidation()}
               >
@@ -141,14 +145,15 @@ const Login = () => {
             </div>
             <div className="text-sm text-center mt-3">
               <p>
-                {`Don't have an account ? sign up `}
+                {`Don't Have an Account? `}
                 <button
+                  className="text-red-900 font-bold"
                   onClick={(e) => {
                     e.preventDefault();
                     router.push("/signup");
                   }}
                 >
-                  here
+                  Signup Here
                 </button>
               </p>
             </div>
@@ -158,11 +163,12 @@ const Login = () => {
           <div class="flex items-center my-2 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"></div>
           <div className="text-center">
             <button
+              className="font-bold text-red-900"
               onClick={(e) => {
                 e.preventDefault();
                 router.push("/organizer/login");
               }}
-            >{`Login as venue owner`}</button>
+            >{`Login as Venue Owner`}</button>
           </div>
         </div>
       </form>
