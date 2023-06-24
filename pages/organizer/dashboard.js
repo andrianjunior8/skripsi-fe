@@ -4,11 +4,24 @@ import api from "../../services/api/venue";
 import saleApi from "../../services/api/sale";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Modal,
+} from "@mui/material";
 
 const VenueDashboard = () => {
   const [header, setHeader] = useState({});
   const [detail, setDetail] = useState([]);
   const [history, setHistory] = useState([]);
+  const [selectedDetailCode, setSelectedDetailCode] = useState("");
+  const [selectedVenueID, setSelectedVenueID] = useState("");
+  const [open, setOpen] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -75,20 +88,35 @@ const VenueDashboard = () => {
       };
       const deleteTD = await api.deleteTDVenue(parameter);
       debounceMountGetVenue(value);
+      handleClose();
     } catch (error) {
       console.log("ERROR GET HISTORY", error);
     }
   }
 
+  function handleDelete(venueid, detailcode) {
+    setSelectedVenueID(venueid);
+    setSelectedDetailCode(detailcode);
+    handleClickOpen();
+  }
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <div class="bg-white w-full h-full py-20">
+    <div class="bg-slate-100 w-full h-full py-20">
       <div class="p-10">
         <div class="bg-[#DC0000] text-[#FFDB89] rounded-3xl justify-center mt-2 mb-5 flex h-auto w-full p-10 place-items-center font-bold xl:text-2xl sm:text-xs">
           Welcome to your dashboard!
         </div>
 
         <div class="flex flex-col items-center  justify-between pt-0 pr-10 pb-0 pl-10 mt-8 mr-auto mb-0 ml-auto max-w-7xl xl:px-5 lg:flex-row">
-          <div class="flex flex-col p-6 w-screen h-[550px] mx-auto max-w-lg text-left gap-4  bordertext-gray-900 bg-[#FFF6C3] rounded-lg border border-[#850000] shadow dark:border-gray-600 xl:p-8 dark:bg-[#F3EFE0] dark:text-black">
+          <div class="flex flex-col p-6 w-screen h-[550px] mx-auto max-w-lg text-left gap-4  bordertext-gray-900 bg-slate-100 rounded-lg border border-[#850000] shadow dark:border-gray-600 xl:p-8 dark:bg-[#F3EFE0] dark:text-black">
             <h3 class="mb-4 text-2xl font-semibold">Select Venue</h3>
 
             <div class="overflow-x-auto w-[475px] shadow-md sm:rounded-lg">
@@ -105,23 +133,20 @@ const VenueDashboard = () => {
                         </td>
                         <td class="px-6 py-4">
                           <a
-                            href="#"
+                            href="/organizer/updatevenue"
                             class="font-medium text-blue-600 dark:text-blue-600 hover:underline"
                           >
-                            Select
+                            EDIT
                           </a>
                         </td>
                         <td class="px-6 py-4">
                           <a
                             class="font-medium text-red-600 dark:text-red-500 hover:underline"
                             onClick={() =>
-                              debounceMountDeleteTDVenue(
-                                item.venue_id,
-                                item.venue_detailcode
-                              )
+                              handleDelete(item.venue_id, item.venue_detailcode)
                             }
                           >
-                            Remove
+                            REMOVE
                           </a>
                         </td>
                       </tr>
@@ -141,28 +166,6 @@ const VenueDashboard = () => {
           </div>
 
           <div class="flex flex-col items-center pr-10 pb-0 pl-10 mr-auto mb-0 ml-auto max-w-7xl xl:px-5 ">
-            {/* <div
-              class="flex flex-col items-center  justify-between pr-10 pb-3 pl-10 mr-auto mb-0 ml-auto max-w-7xl
-      xl:px-5 lg:flex-row"
-            >
-              {" "}
-              <button class="  flex flex-col p-6 mx-auto max-w-lg text-left text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-[#F3EFE0] dark:text-black">
-                <h3 class="mb-4 text-2xl font-semibold">New Booking</h3>
-                <div class="flex flex-row">
-                  <img
-                    src="https://www.freeiconspng.com/uploads/basket-cart-icon-27.png"
-                    width="35"
-                    alt="basket cart icon"
-                  />
-                  <div class="mb-4 text-2xl font-semibold pl-5">2</div>
-                </div>
-              </button>
-              <button class="flex flex-col p-6 h-36 mx-auto ml-3 max-w-lg text-left text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-[#F3EFE0] dark:text-black">
-                <h3 class="mb-4 text-xl font-semibold">
-                  View / Edit Booked Schedule
-                </h3>
-              </button>
-            </div> */}
             <div class="flex flex-col  mx-auto w-full max-w-lg text-left text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-[#F3EFE0] dark:text-black">
               <h3 class="mb-4 text-2xl font-semibold">Order Recap</h3>
 
@@ -197,6 +200,32 @@ const VenueDashboard = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Confirmation"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              are you sure want to book this venue?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>No</Button>
+            <Button
+              onClick={() =>
+                debounceMountDeleteTDVenue(selectedVenueID, selectedDetailCode)
+              }
+              autoFocus
+            >
+              Yes
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </div>
   );

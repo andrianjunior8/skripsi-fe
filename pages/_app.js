@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <div className="bg-[#222222] min-w-screen min-h-screen">
+      <div className="bg-slate-100 min-w-screen min-h-screen">
         {showHeader ? <></> : <Navbar />}
         <Component {...pageProps} />
       </div>

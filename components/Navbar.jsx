@@ -46,7 +46,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="fixed w-screen h-20 shadow-xl z-[100] bg-[#F3EFE0]">
+    <div className="fixed w-screen h-20 shadow-xl z-[100] bg-white">
       <div className="flex justify-center items-center h-full w-full px-2 2xl:px-16 ">
         <div className="absolute left-16">
           <Image
@@ -105,9 +105,9 @@ const Navbar = () => {
                   </MenuItem>
                 </Menu>
               </div>
-              <Link href="/contactus">
+              <Link href="/aboutus">
                 <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
-                  Contact Us
+                  About Us
                 </li>
               </Link>
             </ul>
@@ -115,17 +115,7 @@ const Navbar = () => {
             <ul className="hidden md:flex mr-5">
               <Link href="/organizer/dashboard">
                 <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
-                  Home
-                </li>
-              </Link>
-              <Link href="/organizer/venue">
-                <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
-                  Venue
-                </li>
-              </Link>
-              <Link href="/organizer/contactus">
-                <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
-                  Contact Us
+                  Dashboard
                 </li>
               </Link>
             </ul>
@@ -155,9 +145,13 @@ const Navbar = () => {
                     "aria-labelledby": "basic-button",
                   }}
                 >
-                  <MenuItem onClick={(e) => router.push("/ticket")}>
-                    Ticket
-                  </MenuItem>
+                  {role === "1" || role === 1 ? (
+                    <MenuItem onClick={(e) => router.push("/ticket")}>
+                      Ticket
+                    </MenuItem>
+                  ) : (
+                    <></>
+                  )}
 
                   <MenuItem onClick={() => logout()}>Log out</MenuItem>
                 </Menu>
