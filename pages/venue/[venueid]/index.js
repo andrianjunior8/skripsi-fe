@@ -31,7 +31,7 @@ const VenueID = () => {
   const [detail, setDetail] = useState([]);
   const [hourAvail, setHourAvail] = useState([]);
   const [idxShowImg, setIdxShowImg] = useState(0);
-  const [paymentMethod, setPaymentMethod] = useState("CASH");
+  const [paymentMethod, setPaymentMethod] = useState("BANK");
   const [bookDate, setBookDate] = useState("");
   const [totalHarga, setTotalHarga] = useState(0);
   const [name, setName] = useState("");
@@ -213,11 +213,13 @@ const VenueID = () => {
   };
 
   useEffect(() => {
+    setHourAvail([]);
+    setBookDate("");
     setTotalHarga(0);
   }, [idxShowImg]);
 
   return (
-    <div className="w-screen h-auto absolute bg-white">
+    <div className="w-screen h-auto absolute bg-slate-100">
       <div className="mt-28 w-screen h-auto p-4">
         <Box className="grid grid-cols-2 gap-x-4 mb-10">
           <div className="gap-y-2">
@@ -226,7 +228,7 @@ const VenueID = () => {
                 <img
                   src={detail[idxShowImg].venue_img_source}
                   alt="venue"
-                  className="object-none h-96 w-full rounded"
+                  className="object-fill h-96 w-full rounded"
                 ></img>
               ) : (
                 <img
@@ -254,7 +256,7 @@ const VenueID = () => {
               )}
             </div>
           </div>
-          <div className="rounded-xl p-4 bg-slate-100 shadow-sm border-1 border">
+          <div className="rounded-xl p-4 bg-white shadow-sm border-1 border">
             <div className="space-y-4 space-x-2">
               <h2>{header.venue_name}</h2>
               <h4>{header.venue_city}</h4>
@@ -356,32 +358,9 @@ const VenueID = () => {
                 onChange={handleChangeToggle}
                 aria-label="Platform"
               >
-                <ToggleButton value="CASH" className="flex flex-row w-24">
+                <ToggleButton value="BANK" className="flex flex-row w-24">
                   <div className="flex flex-col items-center justify-center">
-                    <LocalAtmIcon></LocalAtmIcon>CASH
-                  </div>
-                </ToggleButton>
-                <ToggleButton value="QRIS" className="flex flex-row w-24">
-                  <div className="flex flex-col items-center justify-center">
-                    <LocalAtmIcon></LocalAtmIcon>QRIS
-                  </div>
-                </ToggleButton>
-
-                <ToggleButton value="GOPAY" className="flex flex-row w-24">
-                  <div className="flex flex-col items-center justify-center">
-                    <LocalAtmIcon></LocalAtmIcon>GO-PAY
-                  </div>
-                </ToggleButton>
-
-                <ToggleButton value="BCA" className="flex flex-row w-24">
-                  <div className="flex flex-col items-center justify-center">
-                    <LocalAtmIcon></LocalAtmIcon>BCA
-                  </div>
-                </ToggleButton>
-
-                <ToggleButton value="OVO" className="flex flex-row w-24">
-                  <div className="flex flex-col items-center justify-center">
-                    <LocalAtmIcon></LocalAtmIcon>OVO
+                    <LocalAtmIcon></LocalAtmIcon>BANK
                   </div>
                 </ToggleButton>
                 {/* </div> */}

@@ -22,9 +22,24 @@ const updateAccept = async (params) => {
   return await api.get("/sale/updateaccept", { params });
 };
 
+const updatePaymentFlag = async (params) => {
+  return await api.get("/sale/updatepaymentflag", { params });
+};
+
+const getTicket = async (params) => {
+  return await api.get("/sale/getticket", { params });
+};
+
+const getSaleThisMonth = async (params) => {
+  return await api.get("/sale/getsalethismonth", { params });
+};
+
 export default {
   checkAvail,
   insertSale,
   getHistory,
   updateAccept,
+  getTicket,
+  getSaleThisMonth,
+  updatePaymentFlag,
 };

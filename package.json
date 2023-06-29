@@ -25,6 +25,7 @@
     "next": "13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-export-table-to-excel": "^1.0.6",
     "react-icons": "^4.6.0",
     "storage-util": "^1.1.4",
     "tw-elements": "^1.0.0-beta1",
