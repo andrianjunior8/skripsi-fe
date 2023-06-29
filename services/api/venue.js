@@ -34,6 +34,12 @@ const deleteTDVenue = async (params) => {
   return await api.get("/venue/deletetdvenue", { params });
 };
 
+const updateVenue = async (body) => {
+  return await api.post(`/venue/updatedetailvenue`, body, {
+    headers: {},
+  });
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getAllVenue,
@@ -43,4 +49,5 @@ export default {
   getTotalTipeVenue,
   searchVenue,
   deleteTDVenue,
+  updateVenue,
 };

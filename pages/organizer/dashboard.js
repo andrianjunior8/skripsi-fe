@@ -5,14 +5,18 @@ import saleApi from "../../services/api/sale";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Grid,
   Modal,
+  Typography,
 } from "@mui/material";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 const VenueDashboard = () => {
   const [header, setHeader] = useState({});
@@ -21,6 +25,8 @@ const VenueDashboard = () => {
   const [selectedDetailCode, setSelectedDetailCode] = useState("");
   const [selectedVenueID, setSelectedVenueID] = useState("");
   const [open, setOpen] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [totalOrder, setTotalOrder] = useState(0);
 
   const router = useRouter();
 
@@ -29,7 +35,38 @@ const VenueDashboard = () => {
     const venueid = localStorage.getItem("venueid");
     debounceMountGetVenue(venueid);
     debounceMountGetHistory(venueid);
+    debounceMountGetSaleThisMonth(venueid);
   }, [router.isReady]);
+
+  const debounceMountGetSaleThisMonth = useCallback(
+    debounce(mountGetSaleThisMonth, 400)
+  );
+
+  async function mountGetSaleThisMonth(venueID) {
+    try {
+      const newParams = {
+        venueid: venueID,
+      };
+
+      console.log("[GetSaleThisMonth][PARAMS]", newParams);
+      const getSale = await saleApi.getSaleThisMonth(newParams);
+      const { data } = getSale.data;
+      if (data != null) {
+        var tempTotal = 0;
+        for (let i = 0; i < data.length; i++) {
+          tempTotal = tempTotal + data[i].sale_total_payment;
+        }
+        setTotalOrder(data.length);
+        setTotal(tempTotal);
+        console.log("data", data);
+      } else {
+        setTotal(0);
+        setTotalOrder(0);
+      }
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  }
 
   const debounceMountGetVenue = useCallback(debounce(mountGetVenue, 400));
 
@@ -109,18 +146,22 @@ const VenueDashboard = () => {
   };
 
   return (
-    <div class="bg-slate-100 w-full h-full py-20">
-      <div class="p-10">
-        <div class="bg-[#DC0000] text-[#FFDB89] rounded-3xl justify-center mt-2 mb-5 flex h-auto w-full p-10 place-items-center font-bold xl:text-2xl sm:text-xs">
-          Welcome to your dashboard!
+    <div className="w-screen h-auto absolute bg-slate-100 mt-10">
+      <div className="w-screen pl-10 pr-10">
+        <div className="mx-auto max-w-7xl mt-20 sm:px-6 lg:px-8">
+          <div className="relative isolate overflow-hidden bg-gradient-to-b from-red-800 to-red-900 px-6 pt-16 shadow-2xl sm:rounded-3xl ">
+            <Typography className="font-bold text-center text-white mb-16 text-2xl">
+              Welcome to Your Dashboard
+            </Typography>
+          </div>
         </div>
 
-        <div class="flex flex-col items-center  justify-between pt-0 pr-10 pb-0 pl-10 mt-8 mr-auto mb-0 ml-auto max-w-7xl xl:px-5 lg:flex-row">
-          <div class="flex flex-col p-6 w-screen h-[550px] mx-auto max-w-lg text-left gap-4  bordertext-gray-900 bg-slate-100 rounded-lg border border-[#850000] shadow dark:border-gray-600 xl:p-8 dark:bg-[#F3EFE0] dark:text-black">
-            <h3 class="mb-4 text-2xl font-semibold">Select Venue</h3>
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 flex justify-between mt-10 mb-10">
+          <div class="flex flex-col p-4 w-2/3 h-96 gap-2 mr-4 bg-white rounded-lg shadow-md">
+            <p class="mb-4">List Venue</p>
 
-            <div class="overflow-x-auto w-[475px] shadow-md sm:rounded-lg">
-              <table class="w- text-m text-left text-gray-500 dark:text-gray-400">
+            <div class="overflow-x-auto mb-4">
+              <table class="w-full">
                 <tbody>
                   {detail &&
                     detail.map((item, index) => (
@@ -128,20 +169,28 @@ const VenueDashboard = () => {
                         <td class="px-6 py-4 font-semibold text-black dark:text-black">
                           {item.venue_detail_name}
                         </td>
-                        <td class="px-6 py-4 font-semibold text-black dark:text-black">
-                          {"Rp" + item.venue_price}
+                        <td class="px-6 py-4 text-black dark:text-black">
+                          {"Rp" +
+                            Intl.NumberFormat("en-US").format(item.venue_price)}
                         </td>
                         <td class="px-6 py-4">
-                          <a
-                            href="/organizer/updatevenue"
-                            class="font-medium text-blue-600 dark:text-blue-600 hover:underline"
+                          <Button
+                            className="font-bold text-blue-600 hover:text-blue-900"
+                            onClick={() =>
+                              router.push({
+                                pathname: `/organizer/updatevenue`,
+                                query: {
+                                  detailcode: item.venue_detailcode,
+                                },
+                              })
+                            }
                           >
                             EDIT
-                          </a>
+                          </Button>
                         </td>
                         <td class="px-6 py-4">
                           <a
-                            class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                            className="font-bold text-red-600 hover:text-red-900"
                             onClick={() =>
                               handleDelete(item.venue_id, item.venue_detailcode)
                             }
@@ -154,53 +203,33 @@ const VenueDashboard = () => {
                 </tbody>
               </table>
             </div>
-
             <div class="flex flex-row justify-center">
               <Link
+                className="font-bold text-green-600 hover:text-green-900"
                 href="/organizer/addvenue"
-                class="font-medium text-blue-600 dark:text-blue-600 hover:underline"
               >
                 Add Venue
               </Link>
             </div>
           </div>
 
-          <div class="flex flex-col items-center pr-10 pb-0 pl-10 mr-auto mb-0 ml-auto max-w-7xl xl:px-5 ">
-            <div class="flex flex-col  mx-auto w-full max-w-lg text-left text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-[#F3EFE0] dark:text-black">
-              <h3 class="mb-4 text-2xl font-semibold">Order Recap</h3>
-
-              <table class="w-full text-sm text-left border-b  dark:bg-[#F3EFE0] dark:text-black text-l">
-                <tbody>
-                  {history &&
-                    history.map((item, index) => (
-                      <tr
-                        key={index}
-                        class="dark:bg-[#F3EFE0] border-b border-b-[#850000] dark:text-black"
-                      >
-                        <th
-                          scope="row"
-                          class="px-6 py-4 font-medium border-b-[#850000] text-gray-900 whitespace-nowrap dark:bg-[#F3EFE0] dark:text-black"
-                        >
-                          {item.venue_detail_name}
-                        </th>
-                        <td class="px-4 py-4">{item.sale_ordertime}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-
-              <div class="flex flex-row justify-center">
-                <Link
-                  href="/organizer/neworder"
-                  class="font-medium text-blue-600 dark:text-blue-600 hover:underline"
-                >
-                  View All
-                </Link>
+          <div className="bg-slate-100 w-1/3">
+            <div className="bg-white h-full p-4 rounded-lg border shadow-md ml-4">
+              <div className="h-1/3">Summary</div>
+              <div className="text-center h-1/2">
+                <div className="text-4xl font-bold text-black">
+                  {`${"Rp" + Intl.NumberFormat("en-US").format(total)}`}
+                </div>
+                <div className="text-gray-500">{`${totalOrder}x Order this Month`}</div>
+              </div>
+              <div className="text-center font-bold text-red-900 h-1/3">
+                <Link href="/organizer/summary">View More</Link>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div>
         <Dialog
           open={open}
@@ -211,7 +240,7 @@ const VenueDashboard = () => {
           <DialogTitle id="alert-dialog-title">{"Confirmation"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              are you sure want to book this venue?
+              are you sure want to remove this venue?
             </DialogContentText>
           </DialogContent>
           <DialogActions>

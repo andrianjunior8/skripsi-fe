@@ -187,7 +187,7 @@ const Venue = () => {
                   <img
                     src={`${item.venue_img_source}`}
                     alt="futsal"
-                    className="object-none h-40 w-full rounded"
+                    className="object-fill h-40 w-full rounded"
                     width={500}
                     height={500}
                   ></img>
@@ -205,10 +205,6 @@ const Venue = () => {
                           {item.venue_type_name}
                         </Typography>
                       ))}
-
-                      {/* <Typography className="w-auto text-center border bg-purple-500 text-white rounded-md">
-                        Badminton
-                      </Typography> */}
                     </Box>
                     <Box className="flex items-stretch  my-2">
                       <Grid className="item">
@@ -221,7 +217,10 @@ const Venue = () => {
                       {" - "}
                       {item.venue_closetime}
                     </p>
-                    <p className="p-1">Mulai dari Rp{item.lowest_price}</p>
+                    <p className="p-1">
+                      {` Mulai dari Rp
+                      ${Intl.NumberFormat("en-US").format(item.lowest_price)}`}
+                    </p>
                   </Box>
                 </div>
               ))}

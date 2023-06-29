@@ -8,7 +8,21 @@ const getAllTeam = async (params) => {
   return await api.get("/team/getallteam", { params });
 };
 
+const insertTeam = async (body) => {
+  return await api.post(`/team/insertteam`, body, {
+    headers: {},
+  });
+};
+
+const insertMember = async (body) => {
+  return await api.post(`/team/insertmember`, body, {
+    headers: {},
+  });
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getAllTeam,
+  insertTeam,
+  insertMember,
 };
