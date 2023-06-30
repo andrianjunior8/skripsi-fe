@@ -23,11 +23,17 @@ const CreateCommunity = () => {
   const [fileReader, setFileReader] = useState();
   const [berhasilUpdate, setBerhasilUpdate] = useState(false);
   const [gagalUpdate, setGagalUpdate] = useState(false);
+  const [userID, setUserID] = useState("");
+  const [NameUser, setNameUser] = useState("");
 
   const router = useRouter();
 
   useEffect(() => {
     if (!router.isReady) return;
+    const userid = localStorage.getItem("userid");
+    const name = localStorage.getItem("name");
+    setNameUser(name);
+    setUserID(userid);
     setFileReader(new FileReader());
   }, [router.isReady]);
 
@@ -51,11 +57,14 @@ const CreateCommunity = () => {
         team_city: Location,
         team_description: Desc,
         team_logo_img: base64,
+        user_id: userID,
+        member_name: NameUser,
       };
 
       console.log(payload);
 
       const createteam = await api.insertTeam(payload);
+
       console.log("createteam", createteam);
       const { data } = createteam.data;
       console.log("data", data);

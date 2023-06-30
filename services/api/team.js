@@ -8,6 +8,10 @@ const getAllTeam = async (params) => {
   return await api.get("/team/getallteam", { params });
 };
 
+const getMyTeam = async (params) => {
+  return await api.get("team/getmyteam ", { params });
+};
+
 const insertTeam = async (body) => {
   return await api.post(`/team/insertteam`, body, {
     headers: {},
