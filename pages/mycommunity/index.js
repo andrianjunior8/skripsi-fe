@@ -31,7 +31,7 @@ const MyCommunity = () => {
         limit: 20,
         offset: 0,
       };
-      const getTeam = await teamApi.getAllTeam(newParams);
+      const getTeam = await teamApi.getMyTeam(newParams);
 
       const { data } = getTeam.data;
 
@@ -61,7 +61,7 @@ const MyCommunity = () => {
               className="bg-white w-[800px] h-auto m-5 p-10 border rounded shadow-md"
             >
               <div className="grid grid-cols-2  justify-center items-center">
-                <div>
+                <div className="text-center align-middle justify-center">
                   <img
                     src={item.team_logo_img}
                     alt="logo"
@@ -75,7 +75,15 @@ const MyCommunity = () => {
                     <Grid>{`Community Name : ${item.team_name}`}</Grid>
                     <Grid>{`Community City   : ${item.team_city}`}</Grid>
                     <Grid>{`Community Desc    : ${item.team_description}`}</Grid>
-                    <Grid>{`Community Type    : ${item.team_typeid}`}</Grid>
+                    <Grid>{`Community Type    : ${item.venue_type_name}`}</Grid>
+                    <Grid>
+                      <Button
+                        className="mt-4 border bg-red-700 text-white border-red-700  hover:border-red-900 hover:bg-red-900 "
+                        variant="outlined"
+                      >
+                        See Member
+                      </Button>{" "}
+                    </Grid>
                   </div>
                 </div>
               </div>
