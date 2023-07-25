@@ -183,7 +183,7 @@ const UpdateVenue = () => {
             </div>
 
             <div className="pt-5 pb-5 pl-10 pr-10">
-              <label className="text-sm text-gray-600">Change Image:</label>
+              <label className="text-sm text-gray-600">Ganti Gambar:</label>
               <div>
                 <input
                   type="file"
@@ -200,7 +200,7 @@ const UpdateVenue = () => {
                 onClick={() => debounceMountUpdateVenue()}
                 size="small"
               >
-                UPDATE
+                PERBARUI
               </button>
             </div>
           </div>

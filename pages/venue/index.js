@@ -106,7 +106,9 @@ const Venue = () => {
           <div className=" w-80 h-auto rounded-lg bg-white border border-gray-300">
             <div className="p-3">
               <div>
-                <p className="font-bold text-2xl text-[#1d1d1c]">Sport</p>
+                <p className="font-bold text-2xl text-[#1d1d1c]">
+                  Jenis Olahraga
+                </p>
               </div>
               <div class="flex items-center my-2 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"></div>
               {listTipeVenue &&
@@ -125,7 +127,7 @@ const Venue = () => {
         </div>
         <div className="mt-12 ml-[26rem]">
           <div className="mb-7">
-            <p className="text-lg font-bold">Home/Venue</p>
+            <p className="text-lg font-bold">Utama / Venue</p>
           </div>
           <div className="w-full mb-7 flex">
             <div class="flex items-stretch">
@@ -149,7 +151,7 @@ const Venue = () => {
               ></TextField>
 
               <FormControl size="small" className="w-full ml-2" fullWidth>
-                <InputLabel size="small">Type</InputLabel>
+                <InputLabel size="small">Jenis Olahraga</InputLabel>
                 <Select
                   size="small"
                   label="Type"

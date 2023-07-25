@@ -151,7 +151,7 @@ const VenueDashboard = () => {
         <div className="mx-auto max-w-7xl mt-20 sm:px-6 lg:px-8">
           <div className="relative isolate overflow-hidden bg-gradient-to-b from-red-800 to-red-900 px-6 pt-16 shadow-2xl sm:rounded-3xl ">
             <Typography className="font-bold text-center text-white mb-16 text-2xl">
-              Welcome to Your Dashboard
+              Selamat datang di Dasbor Anda
             </Typography>
           </div>
         </div>
@@ -195,7 +195,7 @@ const VenueDashboard = () => {
                               handleDelete(item.venue_id, item.venue_detailcode)
                             }
                           >
-                            REMOVE
+                            HAPUS
                           </a>
                         </td>
                       </tr>
@@ -208,14 +208,14 @@ const VenueDashboard = () => {
                 className="font-bold text-green-600 hover:text-green-900"
                 href="/organizer/addvenue"
               >
-                Add Venue
+                Tambah Venue
               </Link>
             </div>
           </div>
 
           <div className="bg-slate-100 w-1/3">
             <div className="bg-white h-full p-4 rounded-lg border shadow-md ml-4">
-              <div className="h-1/3">Summary</div>
+              <div className="h-1/3">Ringkasan</div>
               <div className="text-center h-1/2">
                 <div className="text-4xl font-bold text-black">
                   {`${"Rp" + Intl.NumberFormat("en-US").format(total)}`}
@@ -223,7 +223,7 @@ const VenueDashboard = () => {
                 <div className="text-gray-500">{`${totalOrder}x Order this Month`}</div>
               </div>
               <div className="text-center font-bold text-red-900 h-1/3">
-                <Link href="/organizer/summary">View More</Link>
+                <Link href="/organizer/summary">Lihat Lebih Banyak</Link>
               </div>
             </div>
           </div>
@@ -240,18 +240,18 @@ const VenueDashboard = () => {
           <DialogTitle id="alert-dialog-title">{"Confirmation"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              are you sure want to remove this venue?
+              Anda yakin ingin menghapus Lapangan ini?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>No</Button>
+            <Button onClick={handleClose}>Tidak</Button>
             <Button
               onClick={() =>
                 debounceMountDeleteTDVenue(selectedVenueID, selectedDetailCode)
               }
               autoFocus
             >
-              Yes
+              Ya
             </Button>
           </DialogActions>
         </Dialog>

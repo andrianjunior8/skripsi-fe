@@ -85,7 +85,7 @@ const VenueOwnerLogin = () => {
   return (
     <div>
       <Head>
-        <title>Venue Owner Login Page</title>
+        <title>Login Sebagai Pemilik Owner</title>
         <link rel="icon" href="/SR.png" />
       </Head>
 
@@ -98,15 +98,13 @@ const VenueOwnerLogin = () => {
               </Link>
               <label className="text-sm text-black font-semibold ml-2">
                 <Link href="/login" className="no-underline text-black">
-                  Back
+                  Kembali
                 </Link>
               </label>
             </div>
 
-            <p className="font-bold text-2xl">Login as Venue Owner</p>
-            <p className="mt-1 mb-5 text-gray-700 text-sm">
-              Hi, login to continue!
-            </p>
+            <p className="font-bold text-2xl">Masuk Sebagai Pemilik Venue</p>
+
             <div className="w-full">
               <div className="mb-3 py-1">
                 <TextField
@@ -123,7 +121,7 @@ const VenueOwnerLogin = () => {
                 <TextField
                   className="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="password"
-                  label="Password"
+                  label="Kata Sandi"
                   size="small"
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={(e) => handleEnterLogin(e)}
@@ -138,7 +136,7 @@ const VenueOwnerLogin = () => {
                   onChange={(e) => setShowPassword(e.target.checked)}
                   className="mr-2"
                 ></input>
-                <label className="text-sm">Show Password</label>
+                <label className="text-sm">Tampilkan Kata Sandi</label>
               </div>
 
               <div className="flex place-content-center mt-10">
@@ -147,7 +145,7 @@ const VenueOwnerLogin = () => {
                   type="button"
                   onClick={() => loginValidation()}
                 >
-                  Login
+                  Masuk
                 </button>
               </div>
             </div>

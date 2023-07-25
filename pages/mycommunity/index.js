@@ -51,7 +51,7 @@ const MyCommunity = () => {
       <div className="mt-28 w-screen place-content-center justify-center grid">
         <Grid className="">
           <Typography className="text-xl font-bold text-center">
-            My Community
+            Komunitas Saya
           </Typography>
         </Grid>
         {listTeam &&
@@ -81,7 +81,7 @@ const MyCommunity = () => {
                         className="mt-4 border bg-red-700 text-white border-red-700  hover:border-red-900 hover:bg-red-900 "
                         variant="outlined"
                       >
-                        See Member
+                        Lihat Anggota
                       </Button>{" "}
                     </Grid>
                   </div>

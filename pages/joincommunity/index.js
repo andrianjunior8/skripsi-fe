@@ -3,11 +3,12 @@ import React, { useState, useCallback, useEffect } from "react";
 import teamApi from "../../services/api/team";
 import { debounce } from "lodash";
 import dayjs from "dayjs";
+import { useRouter } from "next/router";
 
 const MyCommunity = () => {
   const [userID, setUserID] = useState("");
   const [NameUser, setNameUser] = useState("");
-
+  const router = useRouter();
   useEffect(() => {
     if (!router.isReady) return;
     const userid = localStorage.getItem("userid");
@@ -91,7 +92,7 @@ const MyCommunity = () => {
       <div className="mt-28 w-screen place-content-center justify-center grid">
         <Grid className="">
           <Typography className="text-xl font-bold text-center">
-            Join Community
+            Gabung Komunitas
           </Typography>
         </Grid>
         {listTeam &&
@@ -121,13 +122,13 @@ const MyCommunity = () => {
                         className="border bg-red-700 text-white border-red-700  hover:border-red-900 hover:bg-red-900 "
                         variant="outlined"
                       >
-                        Join
+                        Gabung
                       </Button>{" "}
                       <Button
                         className="border bg-red-700 text-white border-red-700  hover:border-red-900 hover:bg-red-900 "
                         onClick={() => handleSeeMember()}
                       >
-                        See Member
+                        Lihat Anggota
                       </Button>
                     </Grid>
                   </div>
@@ -146,7 +147,7 @@ const MyCommunity = () => {
             X
           </Button>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Payment Confirmation
+            Konfirmasi Pembayaran
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
@@ -155,7 +156,7 @@ const MyCommunity = () => {
               variant={"contained"}
               className="mt-8 border bg-red-700 text-white border-red-700  hover:border-red-900 hover:bg-red-900 "
             >
-              PAY
+              BAYAR
             </Button>
           </Grid>
         </Box>

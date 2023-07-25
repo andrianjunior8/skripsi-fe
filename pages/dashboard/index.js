@@ -52,13 +52,13 @@ const Dashboard = () => {
           <p className="text-3xl font-bold text-red-900">Venue</p>
 
           <Link href="/venue" className="no-underline text-gray-500">
-            View More
+            Selengkapnya
           </Link>
         </div>
 
         <div className="mx-auto max-w-7xl sm:px-6 mt-10 mb-10 lg:px-8">
           <div className="relative isolate overflow-hidden bg-slate-100 border-gray-200 border-2 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-            <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
               {listPopularVenue &&
                 listPopularVenue.map((item, index) => (
                   <Button
@@ -102,53 +102,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
-        {/* <div className="bg-red-900 shadow-2xl rounded-2xl border-white mb-10">
-          <div className="bg-red-900 rounded-xl shadow-2xl border-white mx-auto max-w-2xl px-4 sm:px-6 py-4 lg:max-w-7xl lg:px-8">
-            <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-              {listPopularVenue &&
-                listPopularVenue.map((item, index) => (
-                  <Button
-                    key={index}
-                    onClick={() =>
-                      router.push({
-                        pathname: `/venue/${item.venue_id}`,
-                      })
-                    }
-                  >
-                    <div className="group relative border border-gray-400 rounded-md shadow-sm shadow-black bg-white">
-                      <div className="overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
-                        <img
-                          src="https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_654080-1820.jpg?w=1380&t=st=1682410359~exp=1682410959~hmac=a6cb737b977fd94202ed3fbbe330a28a665a0aefdb40c3716cfdf1b3d064e5e2"
-                          className="w-full h-52 rounded-md "
-                          alt="futsal"
-                        ></img>
-                      </div>
-                      <div className="mt-4 flex justify-between p-2">
-                        <div>
-                          <h3 className="text-sm text-gray-700">
-                            <p>
-                              <span
-                                aria-hidden="true"
-                                className="absolute inset-0"
-                              ></span>
-                              {item.venue_name}
-                            </p>
-                          </h3>
-                          <p className="mt-1 text-sm text-gray-500">
-                            {item.venue_province} - {item.venue_city}
-                          </p>
-                          <p className="text-sm font-medium text-gray-900">
-                            Harga Mulai Dari Rp {item.lowest_price}/hour
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Button>
-                ))}
-            </div>
-          </div>
-        </div> */}
 
         <div className="mx-auto max-w-7xl sm:px-6 mt-20 mb-20 lg:px-8">
           <div className="relative isolate overflow-hidden sm:rounded-3xl ">

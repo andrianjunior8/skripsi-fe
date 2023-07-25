@@ -92,14 +92,12 @@ const Login = () => {
             </Link>
             <label className="text-sm font-semibold ml-2">
               <Link href="/dashboard" className="no-underline text-black">
-                Back to Home Page
+                Kembali ke Halaman Utama
               </Link>
             </label>
           </div>
-          <p className="font-bold text-3xl">Login</p>
-          <p className="mt-1 mb-5 text-gray-700 text-sm">
-            Hi, login to continue!
-          </p>
+          <p className="font-bold text-3xl">Masuk</p>
+          <p className="mt-1 mb-5 text-gray-700 text-sm"></p>
           {/* <div class="flex items-center my-2 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"></div> */}
           <div className="w-full max-w-xs ">
             <div className="mb-4 py-1">
@@ -120,7 +118,7 @@ const Login = () => {
                 id="password"
                 size="small"
                 type={showPassword ? "text" : "password"}
-                label="Password"
+                label="Kata Sandi"
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyDown={(e) => handleEnterLogin(e)}
               ></TextField>
@@ -132,7 +130,7 @@ const Login = () => {
                 onChange={(e) => setShowPassword(e.target.checked)}
                 className="mr-2"
               ></input>
-              <label className="text-sm">Show Password</label>
+              <label className="text-sm">Tampilkan Kata Sandi</label>
             </div>
             <div className="flex place-content-center my-2">
               <button
@@ -140,12 +138,12 @@ const Login = () => {
                 type="button"
                 onClick={() => loginValidation()}
               >
-                Login
+                Masuk
               </button>
             </div>
             <div className="text-sm text-center mt-3">
               <p>
-                {`Don't Have an Account? `}
+                {`Tidak memiliki akun?  `}
                 <button
                   className="text-red-900 font-bold"
                   onClick={(e) => {
@@ -153,7 +151,7 @@ const Login = () => {
                     router.push("/signup");
                   }}
                 >
-                  Signup Here
+                  Daftar disini
                 </button>
               </p>
             </div>
@@ -168,7 +166,7 @@ const Login = () => {
                 e.preventDefault();
                 router.push("/organizer/login");
               }}
-            >{`Login as Venue Owner`}</button>
+            >{`Masuk Sebagai Pemilik Venue`}</button>
           </div>
         </div>
       </form>

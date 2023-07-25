@@ -85,7 +85,7 @@ const AddVenue = () => {
         <div className="mx-auto max-w-xl py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="relative isolate overflow-hidden bg-white px-6 pt-16 shadow-2xl sm:rounded-3xl ">
             <div className="text-center pb-2 ">
-              <h3 className=""> ADD VENUE </h3>
+              <h3 className=""> TAMBAH VENUE </h3>
             </div>
 
             <div className="pt-5 pl-10 pr-10">
@@ -145,7 +145,7 @@ const AddVenue = () => {
             </div>
 
             <div className="pt-5 pb-5 pl-10 pr-10">
-              <label className="text-sm text-gray-600">Add Image:</label>
+              <label className="text-sm text-gray-600">Tambah Foto:</label>
               <div>
                 <input
                   type="file"
@@ -162,7 +162,7 @@ const AddVenue = () => {
                 onClick={() => debounceCreateVenueDetail()}
                 size="small"
               >
-                CREATE
+                BUAT
               </button>
             </div>
           </div>

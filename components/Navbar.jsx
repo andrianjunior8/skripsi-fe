@@ -66,7 +66,7 @@ const Navbar = () => {
             <ul className="hidden md:flex mr-5">
               <Link href="/dashboard">
                 <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
-                  Home
+                  Halaman Utama
                 </li>
               </Link>
               <Link href="/venue">
@@ -83,7 +83,7 @@ const Navbar = () => {
                   className="m-8 text-sm text-[#000000] uppercase hover:border-b"
                   onClick={(e) => handleClick(e)}
                 >
-                  Community
+                  Komunitas
                 </Button>
                 <Menu
                   id="basic-menu"
@@ -95,19 +95,19 @@ const Navbar = () => {
                   }}
                 >
                   <MenuItem onClick={() => router.push("/mycommunity")}>
-                    My Community
+                    Komunitas Saya
                   </MenuItem>
                   <MenuItem onClick={() => router.push("/joincommunity")}>
-                    Join Community
+                    Gabung Komunitas
                   </MenuItem>
                   <MenuItem onClick={() => router.push("/createcommunity")}>
-                    Create Community
+                    Buat Komunitas
                   </MenuItem>
                 </Menu>
               </div>
               <Link href="/aboutus">
                 <li className="m-10 text-sm text-[#000000] uppercase hover:border-b">
-                  About Us
+                  Tentang Kami
                 </li>
               </Link>
             </ul>
@@ -134,7 +134,7 @@ const Navbar = () => {
                   className="m-8 text-sm text-[#000000] uppercase hover:border-b"
                   onClick={(e) => handleClickMenu(e)}
                 >
-                  <p className="text-[#000000]">Welcome, {name}</p>
+                  <p className="text-[#000000]">Selamat Datang, {name}</p>
                 </Button>
                 <Menu
                   id="basic-menu"
@@ -147,13 +147,13 @@ const Navbar = () => {
                 >
                   {role === "1" || role === 1 ? (
                     <MenuItem onClick={(e) => router.push("/ticket")}>
-                      Ticket
+                      Tiket
                     </MenuItem>
                   ) : (
                     <></>
                   )}
 
-                  <MenuItem onClick={() => logout()}>Log out</MenuItem>
+                  <MenuItem onClick={() => logout()}>Keluar</MenuItem>
                 </Menu>
               </div>
             </div>
@@ -164,7 +164,7 @@ const Navbar = () => {
                 className="rounded font-bold p-2 m-2 bg-blue-600"
                 onClick={() => router.push("/login")}
               >
-                Login
+                Masuk
               </Button>
 
               <Button
@@ -172,7 +172,7 @@ const Navbar = () => {
                 className="rounded font-bold p-2 m-2 bg-blue-600"
                 onClick={() => router.push("/signup")}
               >
-                Sign Up
+                Daftar
               </Button>
             </div>
           )}

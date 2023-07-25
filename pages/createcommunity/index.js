@@ -87,17 +87,17 @@ const CreateCommunity = () => {
         <div className="mx-auto max-w-xl py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="relative isolate overflow-hidden bg-white px-6 pt-16 shadow-2xl sm:rounded-3xl ">
             <div className="text-center pb-2 ">
-              <h3 className=""> YOUR COMMUNITY </h3>
+              <h3 className=""> KOMUNITAS ANDA </h3>
             </div>
 
             <Collapse in={berhasilUpdate}>
               <Alert severity="success" className="mb-2">
-                Berhasil Insert
+                Berhasil Ditambahkan
               </Alert>
             </Collapse>
             <Collapse in={gagalUpdate}>
               <Alert severity="error" className="mb-2">
-                Gagal Insert
+                Gagal Ditambahkan
               </Alert>
             </Collapse>
             <div className="pt-5 pl-10 pr-10">
@@ -118,7 +118,7 @@ const CreateCommunity = () => {
                 id="locationTeam"
                 size="small"
                 type="text"
-                label="Location"
+                label="Lokasi"
                 value={Location}
                 onChange={(e) => setLocation(e.target.value)}
               ></TextField>
@@ -127,7 +127,7 @@ const CreateCommunity = () => {
             <div className="pt-5 pl-10 pr-10">
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label" size="small">
-                  Sports
+                  Cabang olahraga
                 </InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -151,7 +151,7 @@ const CreateCommunity = () => {
               <TextField
                 className="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="outlined-multiline-static"
-                label="Description"
+                label="Deskripsi"
                 size="small"
                 onChange={(e) => setDesc(e.target.value)}
                 multiline
@@ -160,7 +160,7 @@ const CreateCommunity = () => {
             </div>
 
             <div className="pt-5 pb-5 pl-10 pr-10">
-              <label className="text-sm text-gray-600">Add Logo:</label>
+              <label className="text-sm text-gray-600">Tambahkan Logo:</label>
               <div>
                 <input
                   type="file"
@@ -179,7 +179,7 @@ const CreateCommunity = () => {
                 size="small"
                 onClick={() => debounceCreateTeam()}
               >
-                CREATE
+                BUAT
               </button>
             </div>
           </div>
